@@ -3,14 +3,13 @@
     <h1>Board</h1>
     <button @click="fetchGrid()">Fetch Grid...</button>
     <button @click="subscribeToBoardChanges()">Subscribe...</button>
-    {{ currentTileUpdate.x }}, {{ currentTileUpdate.y }}
     <div
-      v-for="(row, key) in tiles.rows"
-      :key="key"
+      v-for="(row, rowKey) in tiles.rows"
+      :key="rowKey"
       class="gameboard-row">
       <span
-        v-for="(tile, tilekey) of row.tiles"
-        :key="tilekey"
+        v-for="(tile, tileKey) of row.tiles"
+        :key="tileKey"
         class="gameboard-tile">
         <Tile :tile="tile"/>
       </span>
@@ -20,6 +19,7 @@
 
 <script>
   import {Container} from 'semantic-ui-vue';
+  import Vue from 'vue';
   import Tile from './Tile.vue';
   import tileService from '../services/tile-services';
 
@@ -45,10 +45,9 @@
           .subscribe(
             (response) => {
               self.tiles = response.data.getGrid;
-              console.log('tiles are', JSON.stringify(self.tiles));
             },
             (e) => {
-              console.log(e);
+              console.log(`error, ${e}`);
             },
             () => {
               console.log('refresh finished')
@@ -62,10 +61,10 @@
             const updatedTileInfo = response.data;
             if (self.tiles && self.tiles.rows && self.tiles.rows.length > 0) {
               const {x, y} = updatedTileInfo.tileChanges.location;
-              self.currentTileUpdate = { x: x, y: y };
-              self.tiles.rows[y].tiles[x] = updatedTileInfo.tileChanges;
+              self.$set(self.tiles.rows[y].tiles[x], 'type', updatedTileInfo.tileChanges.type);
             }
-          });
+          },
+          (e) => { console.log(e);});
       }
     }
   };

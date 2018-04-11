@@ -13,18 +13,15 @@ module.exports = {
     setInterval(() => {
       const row = Math.floor(Math.random() * prefs.grid.rows);
       const col = Math.floor(Math.random() * prefs.grid.cols);
-      console.log(`Changing ${row}, ${col}`);
       const currentTile = gridDomain.getTileInfo(row, col);
-      console.log(`Current Tile ${row}, ${col} is ${JSON.stringify(currentTile)}`);
       const updatedTile = Object.assign(
         {},
         currentTile,
         { type: randomTileType() }
       );
       gridDomain.mutateTile(row, col, updatedTile);
-      console.log(`Tile changing: ${JSON.stringify(updatedTile)}`);
       return pubsub.publish(TILE_CHANGES_CHANNEL, {tileChanges: updatedTile})
-    }, 1000);
+    }, prefs.refreshInterval);
     return pubsub.asyncIterator(TILE_CHANGES_CHANNEL);
   }
 };

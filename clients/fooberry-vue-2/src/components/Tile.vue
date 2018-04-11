@@ -15,7 +15,6 @@ export default {
     }
   },
   data: function() {
-    console.log(`incoming tile prop ${JSON.stringify(this.tile)}`);
     return {
       icon: tileServices.mapTypeToIconInfo(this.tile.type)
     }
@@ -26,9 +25,11 @@ export default {
     }
   },
   watch: {
-    tile: function () {
-      console.log(`recalculating tile...`);
-      this.icon = tileServices.mapTypeToIconInfo(this.tile.type)
+    tile: {
+      handler: function () {
+        this.icon = tileServices.mapTypeToIconInfo(this.tile.type)
+      },
+      deep: true
     },
   }
 };
