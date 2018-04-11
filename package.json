@@ -6,7 +6,10 @@
   "scripts": {
     "start": "concurrently \"npm run vueclient\" \"npm run yogaserver\"",
     "vueclient": "cd clients/fooberry-vue-2 && yarn start",
-    "yogaserver": "cd server && yarn start"
+    "yogaserver": "cd server && yarn start",
+    "postinstall": "yarn postinstall:yoga && yarn postinstall:vue2",
+    "postinstall:yoga": "cd server && yarn install",
+    "postinstall:vue2": "cd clients/fooberry-vue-2 && yarn install"
   },
   "repository": {
     "type": "git",
