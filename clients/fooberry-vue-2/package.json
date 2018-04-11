@@ -1,0 +1,88 @@
+{
+  "name": "fooberry-vue-2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "plotz": "concurrently \"vue-cli-service serve --open\" \"VUE_APP_GRAPHQL_PATH=/shared/graphql vue-cli-service run-graphql-api\"",
+    "start": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service test",
+    "lint": "vue-cli-service lint",
+    "graphql-api": "vue-cli-service graphql-api",
+    "run-graphql-api": "vue-cli-service run-graphql-api",
+    "run-graphql": "node run-graphql-api",
+    "prod-graphql-api": "cross-env NODE_ENV=production vue-cli-service run-graphql-api"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.0.0",
+    "apollo-client": "^2.0.1",
+    "apollo-link": "^1.0.7",
+    "apollo-link-context": "^1.0.7",
+    "apollo-link-http": "^1.5.3",
+    "apollo-link-persisted-queries": "^0.2.0",
+    "apollo-link-ws": "^1.0.7",
+    "apollo-utilities": "^1.0.11",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "graphql": "^0.13.2",
+    "lowdb": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-vue": "^0.2.6",
+    "shortid": "^2.2.8",
+    "subscriptions-transport-ws": "^0.9.7",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-beta.6",
+    "@vue/cli-plugin-eslint": "^3.0.0-beta.6",
+    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.6",
+    "@vue/cli-service": "^3.0.0-beta.6",
+    "@vue/cli-shared-utils": "^3.0.0-beta.6",
+    "@vue/eslint-config-prettier": "^3.0.0-beta.6",
+    "@vue/test-utils": "^1.0.0-beta.10",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "concurrently": "^3.5.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-graphql": "^1.5.0",
+    "eslint-plugin-jest": "^21.15.0",
+    "eslint-plugin-vue": "^4.4.0",
+    "graphql-tag": "^2.5.0",
+    "jest": "^22.4.3",
+    "jest-runner-eslint": "^0.4.0",
+    "vue-cli-plugin-apollo": "^0.7.2",
+    "vue-template-compiler": "^2.5.13",
+    "babel-preset-vue": "^2.0.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "description": "A Vue.js project",
+  "author": "Ken Rimple <krimple@chariotsolutions.com>",
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
+}

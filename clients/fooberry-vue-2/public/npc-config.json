@@ -1,0 +1,39 @@
+{
+  "thief": {
+    "name": "Thief",
+    "key": "thief",
+    "icon": "./icons/cathelineau/originals/svg/bad-gnome.svg",
+    "weapon": "knife",
+    "startX": 1,
+    "startY": 1,
+    "hitPoints": 6,
+    "maxHitPoints": 6,
+    "moveEvery": 2,
+    "point": {
+      "x": 3,
+      "y": 3
+    },
+    "weapons": {
+      "knife": { "name": "Knife", "damage": 4, "accuracy": 0.2 }
+    }
+  },
+  "wyvern": {
+    "name": "Wyvern",
+    "key": "wyvern",
+    "icon": "./icons/lorc/originals/svg/wyvern.svg",
+    "weapon": "claws",
+    "startX": 10,
+    "startY": 10,
+    "hitPoints": 7,
+    "maxHitPoints": 7,
+    "moveEvery": 3,
+    "weapons": {
+      "claws": { "name": "Treacherous Claws", "damage": 12, "accuracy": 0.5 }
+    },
+     "point": {
+      "x": 6,
+      "y": 6
+    }
+  }
+
+}
