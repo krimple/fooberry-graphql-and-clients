@@ -36,7 +36,7 @@
     },
     created: function () {
       this.fetchGrid();
-      // this.subscribeToBoardChanges();
+      this.subscribeToBoardChanges();
     },
     methods: {
       fetchGrid: function () {
@@ -60,7 +60,6 @@
         tileService.tileChanges$()
           .subscribe(function (response) {
             const updatedTileInfo = response.data;
-            console.log(`updated tile info: ${JSON.stringify(updatedTileInfo)}`);
             if (self.tiles && self.tiles.rows && self.tiles.rows.length > 0) {
               const {x, y} = updatedTileInfo.tileChanges.location;
               self.currentTileUpdate = { x: x, y: y };

@@ -1,0 +1,25 @@
+{
+  "name": "fooberry-graphql-and-clients",
+  "version": "1.0.0",
+  "description": "This is a GraphQL-powered client-and-server approach to the Fooberry app.  Currently iterating on the server using graphql-yoga and the client using vue and graphql-link-ws.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run vueclient\" \"npm run yogaserver\"",
+    "vueclient": "cd clients/fooberry-vue-2 && yarn start",
+    "yogaserver": "cd server && yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krimple/fooberry-graphql-and-clients.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krimple/fooberry-graphql-and-clients/issues"
+  },
+  "homepage": "https://github.com/krimple/fooberry-graphql-and-clients#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
