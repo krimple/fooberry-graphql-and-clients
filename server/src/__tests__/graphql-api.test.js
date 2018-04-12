@@ -1,4 +1,4 @@
-const { prefs } = require('../prefs');
+const {prefs} = require('../prefs');
 
 const {tester} = require('graphql-tester');
 describe('GraphQL API', function () {
@@ -11,54 +11,55 @@ describe('GraphQL API', function () {
   });
 
   it('should access entire grid with query to getGrid', done => {
-   self.test(JSON.stringify({
-     query: `
-       query getGrid {
-        getGrid {
-            rows {
-              cols {
-                location {
-                  x y
-                }
-                tile {
-                  terrain {
-                    icon
-                    description
-                  }
-                  revealed
-                }
-              }
-            }
-          }
-        }
+    self.test(JSON.stringify({
+      query: `
+       query {
+         getGrid {
+           rows {
+             tiles {
+               location {
+                 row col 
+               }
+               type  
+               contents {
+                 ...on NPC {
+                   id
+                   name
+                 }
+                 ...on Player {
+                   id
+                   email
+                   name   
+                 }           
+               }   
+             }
+           }
+         }
+       }
      `
-   }))
-   .then(res => {
-     const grid = res.data.getGrid;
-     expect(res.status).toBe(200);
-     expect(grid.rows.length).toEqual(prefs.grid.rows);
-     expect(grid.rows[0].cols.length).toEqual(prefs.grid.cols);
-     done();
-   })
-   .catch(e => {
-     done.fail(JSON.stringify(e));
-   });
+    }))
+      .then(res => {
+        debugger;
+        const grid = res.data.getGrid;
+        expect(res.status).toBe(200);
+        expect(grid.rows.length).toEqual(prefs.grid.rows);
+        expect(grid.rows[0].tiles.length).toEqual(prefs.grid.cols);
+        done();
+      })
+      .catch(e => {
+        done.fail(JSON.stringify(e));
+      });
   });
 
   it('should access individual grid cell data with query to tileInfo', done => {
     self.test(JSON.stringify({
       query: `query tileInfo($row: Int, $col: Int) {
         tileInfo(row: $row, col: $col) {
-          location {
-            x
-            y
-          }
-          tile {
-            terrain {
-              icon
-              description
+            location {
+              row
+              col
             }
-          }
+           type 
         }
       }
       `,
@@ -67,14 +68,19 @@ describe('GraphQL API', function () {
         col: 5
       }
     }))
-    .then(res => {
-      expect(res.status).toBe(200);
-      expect(res.success).toBe(true);
-      done();
-    })
-    .catch(err => {
-      console.log(err);
-      done.fail(err);
-    })
+      .then(res => {
+        debugger;
+        if (res.status !== 200) {
+          console.log(JSON.stringify(res));
+        }
+        expect(res.data).toBeDefined();
+        expect(res.status).toBe(200);
+        expect(res.success).toBe(true);
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done.fail(err);
+      })
   });
 });

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "debug": "nodemon --inspect-brk src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "testDebug": "jest --inspect-brk"
   },
   "keywords": [],
   "author": "",

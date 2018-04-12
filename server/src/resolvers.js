@@ -1,5 +1,7 @@
 const commands = require('./commands');
 const store = require('./redux/createStore');
+// TODO - redundant - refactor out into shared with server prefs
+const TILE_CHANGES_CHANNEL = 'fooberry-tile-changes';
 
 module.exports = {
   resolvers: {
@@ -14,21 +16,8 @@ module.exports = {
     },
     Subscription: {
      tileChanges: {
-       // transforming the payload to something smaller, more manageable!
-      /*resolve: (payload) => {
-         return grid.rows.map((row) => {
-            return rows.map((cols) => {
-
-            })
-         });
-
-             x: payload.data.location.x,
-               y: payload.data.location.y
-           }
-         }
-       },*/
-       subscribe: async (parent, args, ctx) => {
-         return commands.tileChanges(parent, args, ctx.pubsub);
+       subscribe: (parent, args, ctx) => {
+         return ctx.pubsub.asyncIterator(TILE_CHANGES_CHANNEL);
        }
      }
     }

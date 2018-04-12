@@ -1,7 +1,8 @@
 import Vuex from 'vuex';
 import createLogger from 'vuex/dist/logger';
 import tileServices from '../services/tile-services';
-
+import { withFilter } from 'graphql-subscriptions';
+const SOMETHING_CHANGED_TOPIC = '';
 
 export default function() {
   return new Vuex.Store({
