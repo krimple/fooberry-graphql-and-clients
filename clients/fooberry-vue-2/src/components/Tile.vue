@@ -1,38 +1,45 @@
 <template>
   <img
     :class="{ icon: true, dimmed: noPlayer }"
-    :src="icon">
+    :src="icon || ''">
 </template>
 <script>
+  import {mapState} from 'vuex';
   import tileServices from '../services/tile-services';
 
-export default {
+  export default {
 
-  props: {
-    tile: {
-      type: Object,
-      default: null
-    }
-  },
-  data: function() {
-    return {
-      icon: tileServices.mapTypeToIconInfo(this.tile.type)
-    }
-  },
-  computed: {
-    noPlayer: function() {
-      return false;
-    }
-  },
-  watch: {
-    tile: {
-      handler: function () {
-        this.icon = tileServices.mapTypeToIconInfo(this.tile.type)
+    props: {
+      row: {
+        type: Number,
+        required: true
       },
-      deep: true
+      col: {
+        type: Number,
+        required: true
+      }
     },
-  }
-};
+    computed: {
+      ...mapState({
+        // AVOID arrow functions here!!!
+        icon: function(state) {
+          const type = state.grid.rows[this.row].tiles[this.col].type;
+          return type ? tileServices.mapTypeToIconInfo(type) : '';
+        }
+      }),
+      noPlayer: function () {
+        return false;
+      }
+    },
+    watch: {
+      tile: {
+        handler: function () {
+          this.icon = tileServices.mapTypeToIconInfo(this.tile.type)
+        },
+        deep: true
+      },
+    }
+  };
 </script>
 <style>
   .dimmed {

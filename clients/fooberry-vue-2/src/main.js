@@ -5,22 +5,22 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import SuiVue from 'semantic-ui-vue';
 import App from './App';
-// import store from './vuex/store';
+import createStore from './vuex/store';
 
 import router from './router';
 import 'semantic-ui-css/semantic.min.css';
 //  import { apolloProvider } from './vue-apollo';
 
 Vue.use(SuiVue);
-// Vue.use(Vuex);
 Vue.use(VueRouter);
-
+Vue.use(Vuex);
+const store = createStore();
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   // provide: apolloProvider.provide(),
   router,
-  // store,
+  store,
   render: h => h(App)
 }).$mount('#app');

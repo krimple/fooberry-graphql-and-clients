@@ -46,11 +46,11 @@ module.exports = {
     name: String!
   }
   
-union Character = NPC | Player 
+  union Character = NPC | Player 
 
   type Point {
-    x: Int! 
-    y: Int!
+    col: Int! 
+    row: Int!
   }
 `
 };

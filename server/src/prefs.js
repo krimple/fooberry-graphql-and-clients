@@ -1,10 +1,10 @@
 module.exports = {
   prefs: {
-    refreshInterval: 300,
+    refreshInterval: 3000,
     logPayload: false,
     grid: {
-      cols: 25,
-      rows: 15
+      cols: 10,
+      rows: 5
     },
     npcs: {
       maxNpcs: 5,

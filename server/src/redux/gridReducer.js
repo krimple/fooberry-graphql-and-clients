@@ -34,13 +34,14 @@ module.exports = {
 };
 
 function changeTile(state) {
-  const randomX = Math.floor(Math.random() * numCols);
-  const randomY = Math.floor(Math.random() * numRows);
+  const randomCol = Math.floor(Math.random() * numCols);
+  const randomRow = Math.floor(Math.random() * numRows);
   const randomTileType = Math.floor(Math.random() * 4);
 
   // create new array from old, mutate new state internally once done
   const newState = [...state];
-  newState[randomY][randomX] = new Tile(randomY, randomX, randomTileType);
+  newState[randomCol][randomRow] = new Tile(randomCol, randomRow, randomTileType);
+  Co
   return newState;
 }
 

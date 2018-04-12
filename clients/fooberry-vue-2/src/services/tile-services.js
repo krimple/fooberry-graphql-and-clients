@@ -30,8 +30,8 @@ export default {
             rows {
               tiles {
                 location {
-                  x 
-                  y
+                  col 
+                  row
                 }
                 type 
                 contents {
@@ -58,8 +58,8 @@ export default {
             subscription {
               tileChanges {
                 location {
-                  x 
-                  y
+                  col 
+                  row 
                 }
                 type 
                 contents {

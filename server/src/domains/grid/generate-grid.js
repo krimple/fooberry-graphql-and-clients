@@ -8,16 +8,16 @@ module.exports = function generateGrid() {
     rows: []
   };
 
-  for (let y = 0; y < prefs.grid.rows; y++) {
+  for (let rowIdx = 0; rowIdx < prefs.grid.rows; rowIdx++) {
     const row = {
       id: shortid.generate(),
       tiles: []
     };
-    for (let x = 0; x < prefs.grid.cols; x++) {
+    for (let colIdx = 0;  colIdx < prefs.grid.cols; colIdx++) {
       row.tiles.push(
         {
           id: shortid.generate(),
-          location: { x: x, y: y },
+          location: { col: colIdx, row: rowIdx },
           type: Tile.randomTileType(),
           contents: null
         }

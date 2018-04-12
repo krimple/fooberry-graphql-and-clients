@@ -4,14 +4,16 @@
     <button @click="fetchGrid()">Fetch Grid...</button>
     <button @click="subscribeToBoardChanges()">Subscribe...</button>
     <div
-      v-for="(row, rowKey) in tiles.rows"
+      v-for="(row, rowKey) in grid.rows"
       :key="rowKey"
       class="gameboard-row">
       <span
-        v-for="(tile, tileKey) of row.tiles"
-        :key="tileKey"
+        v-for="(col, colKey) of row.tiles"
+        :key="colKey"
         class="gameboard-tile">
-        <Tile :tile="tile"/>
+        <Tile
+          :row ="rowKey"
+          :col="colKey" />
       </span>
     </div>
   </sui-container>
@@ -19,9 +21,8 @@
 
 <script>
   import {Container} from 'semantic-ui-vue';
-  import Vue from 'vue';
   import Tile from './Tile.vue';
-  import tileService from '../services/tile-services';
+  import { mapState } from 'vuex';
 
   export default {
     components: {
@@ -30,44 +31,29 @@
     },
     data: function () {
       return {
-        tiles: [],
-        currentTileUpdate: {x: 0, y: 0}
+        currentTileUpdate: {col: 0, row: 0}
       }
     },
+    computed: mapState({
+      grid: state => state.grid
+    }),
     created: function () {
       this.fetchGrid();
       this.subscribeToBoardChanges();
     },
     methods: {
       fetchGrid: function () {
-        const self = this;
-        tileService.refreshGrid()
-          .subscribe(
-            (response) => {
-              self.tiles = response.data.getGrid;
-            },
-            (e) => {
-              console.log(`error, ${e}`);
-            },
-            () => {
-              console.log('refresh finished')
-            }
-          );
+        this.$store.dispatch('loadGrid') ;
       },
       subscribeToBoardChanges: function () {
-        const self = this;
-        tileService.tileChanges$()
-          .subscribe(function (response) {
-            const updatedTileInfo = response.data;
-            if (self.tiles && self.tiles.rows && self.tiles.rows.length > 0) {
-              const {x, y} = updatedTileInfo.tileChanges.location;
-              self.$set(self.tiles.rows[y].tiles[x], 'type', updatedTileInfo.tileChanges.type);
-            }
-          },
-          (e) => { console.log(e);});
+        this.$store.dispatch('watchForTileChanges');
       }
     }
   };
+
+
+  // Hold in case I ever need to do this without Vuex again...
+  // self.$set(self.tiles.rows[y].tiles[x], 'type', updatedTileInfo.tileChanges.type);
 </script>
 
 <style scoped>
@@ -84,3 +70,4 @@
     margin: 0;
   }
 </style>
+
